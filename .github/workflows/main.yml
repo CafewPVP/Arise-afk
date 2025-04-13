@@ -4,21 +4,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  afk:
+  run-afk:
     runs-on: ubuntu-latest
-    timeout-minutes: 350  # <--- เพิ่มบรรทัดนี้
-
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Install Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 18
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install noblox.js
+        run: npm install noblox.js
 
       - name: Run AFK script
         run: node afk.js
+        env:
+          ROBLOX_COOKIE: ${{ secrets.ROBLOX_COOKIE }}
