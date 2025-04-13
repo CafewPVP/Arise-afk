@@ -1,0 +1,18 @@
+name: Arise AFK
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'  # รันทุกชั่วโมง
+
+jobs:
+  afk:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run AFK script
+        run: |
+          chmod +x roblox-afk
+          ./roblox-afk
