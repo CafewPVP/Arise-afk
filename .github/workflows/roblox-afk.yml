@@ -1,0 +1,25 @@
+name: Roblox AFK Bot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'  # รันทุก 15 นาที
+
+jobs:
+  run-afk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Run AFK Script
+        run: node afk.js
