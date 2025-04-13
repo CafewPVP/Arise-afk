@@ -18,3 +18,8 @@ const puppeteer = require('puppeteer');
   }
 }
 )();
+setInterval(() => {
+  console.log('AFK still running...');  // log ทุก 1 นาที
+}, 60000);
+
+// ส่วนคำสั่งหลักของบอทคุณต่อจากนี้
