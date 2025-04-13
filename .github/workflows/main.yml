@@ -7,11 +7,11 @@ jobs:
   afk:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
-      - name: Give execute permission to script
-        run: chmod +x ./afk
+    - name: Give execute permission to script
+      run: chmod +x roblox-afk/roblox-afk
 
-      - name: Run AFK script
-        run: ./afk
+    - name: Run AFK script
+      run: ./roblox-afk/roblox-afk
