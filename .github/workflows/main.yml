@@ -1,4 +1,4 @@
-name: Arise AFK
+name: Run Roblox AFK Script
 
 on:
   workflow_dispatch:
@@ -6,12 +6,18 @@ on:
 jobs:
   afk:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Give execute permission to script
-      run: chmod +x roblox-afk/roblox-afk
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
 
-    - name: Run AFK script
-      run: ./roblox-afk/roblox-afk
+      - name: Install Puppeteer
+        run: npm install puppeteer
+
+      - name: Run afk.js
+        run: node afk.js
