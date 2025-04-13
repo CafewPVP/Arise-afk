@@ -1,25 +1,20 @@
-const puppeteer = require('puppeteer');
+const noblox = require('noblox.js');
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox'] });
-  const page = await browser.newPage();
-
   try {
-    console.log('กำลังเข้าสู่ Roblox...');
-    await page.goto('https://www.roblox.com/games/13864661037/Arise-Crossover', { waitUntil: 'networkidle2' });
+    const cookie = process.env.ROBLOX_COOKIE;
+    await noblox.setCookie(cookie);
+    const currentUser = await noblox.getCurrentUser();
+    console.log(`ล็อกอินเป็น ${currentUser.UserName}`);
 
-    console.log('อยู่ในเกมแล้ว... จำลอง AFK 10 นาที');
-    await new Promise(resolve => setTimeout(resolve, 1000 * 60 * 10)); // 10 นาที
+    const gameId = 13864661037;
+    await noblox.joinGame(gameId);
+    console.log("เข้าห้องเรียบร้อย กำลัง AFK...");
+
+    await new Promise(resolve => setTimeout(resolve, 1000 * 60 * 20)); // 20 นาที
+    console.log("AFK จบแล้ว");
 
   } catch (err) {
-    console.error('เกิดข้อผิดพลาด:', err);
-  } finally {
-    await browser.close();
+    console.error("เกิดข้อผิดพลาด:", err);
   }
-}
-)();
-setInterval(() => {
-  console.log('AFK still running...');  // log ทุก 1 นาที
-}, 60000);
-
-// ส่วนคำสั่งหลักของบอทคุณต่อจากนี้
+})();
